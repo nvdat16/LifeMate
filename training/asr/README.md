@@ -113,4 +113,16 @@ ZIP `<run-name>-adapter-results.zip` nằm cạnh thư mục run, không chứa 
 
 Baseline trước–sau dùng cùng base, precision, quantization và greedy decoding. WER/CER chuẩn hóa NFC, chữ thường, dấu câu thành khoảng trắng; giữ dấu tiếng Việt và chữ số. CER bỏ khoảng trắng; WER tính tổng lỗi / tổng số từ. Test chỉ chạy sau khi chọn adapter bằng validation. Theo notebook, bộ train đã từng được xem qua benchmark nên test tách ra là đánh giá nội bộ, không phải test hoàn toàn chưa từng xem. Điểm smoke chỉ dùng kiểm tra pipeline.
 
+## Export và upload Hugging Face
+
+[`scripts/export_hf.py`](scripts/export_hf.py) gộp LoRA vào base đúng commit, chuyển CTranslate2 cho faster-whisper (runtime `src/lifemate/adapters/asr/whisper_adapter.py`) và upload **private**:
+
+```bash
+pip install ctranslate2
+hf auth login   # token quyền write
+python training/asr/scripts/export_hf.py --run-dir training/asr/outputs/phowhisper-medium-lora-v1 --repo-id PhoWhisper-medium-zaic
+```
+
+Tạo `<user>/<repo>-lora` (adapter) và `<user>/<repo>-ct2-int8-float16` (dùng làm `model_size_or_path`). Chỉ file trọng số/config và metric tổng hợp được upload; transcript, split, dự đoán và CSV từng clip không rời máy. `--upload-merged` upload thêm bản transformers đã gộp, `--skip-ct2` chỉ upload adapter, `--no-upload` chỉ export local vào `<run>/export/`.
+
 Notebook gốc được giữ làm tài liệu tham khảo. Adapter runtime vẫn ở `src/lifemate/adapters/asr/`; trainer không tự thay model đang dùng bởi agent.
