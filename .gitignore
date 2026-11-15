@@ -1,0 +1,64 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C/C++ build artifacts & executables
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Environments & virtualenvs
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Data and secret competition datasets (Strictly forbidden by organizers)
+train/
+public_test/
+private_test/
+*.wav
+*.mp3
+*.ogg
+train.zip
+
+# Ignore root-level submission files & local backup files
+/*.jsonl
+*.bak
+
+# Scripts: ignore binary installers & temp browser states
+scripts/*.exe
+scripts/.browser_state.json
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Large binaries, models & checkpoints
+models/
+checkpoints/
+*.bin
+*.pt
+*.pth
+*.safetensors
+*.gguf
+
+# Local training checkpoints, logs & experiment tracking
+training/llm/outputs/
+training/asr/outputs/
+mlruns/
+*.db
+wandb/
+
+# Competition dataset bundle & derived training data (keep local, never publish)
+train+public_test/
+training/llm/data/**/*.jsonl
+training/llm/data/distillation/*.json
+# Raw competition-sample runs/logs
+scripts/sample_0001_real_run_log.json
+experiments/luna_inference_10_samples.json
+docs/portal_raw_tabs.json
+docs/*_raw_output_sample_*.md

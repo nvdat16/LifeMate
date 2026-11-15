@@ -1,0 +1,22 @@
+{
+  "dataset_name": "LifeMate-Agentic-SFT-1526",
+  "description": "Golden ReAct trajectories verified via Zaic Sandbox Environment state matching.",
+  "total_samples": 1526,
+  "train_samples": 1450,
+  "val_samples": 76,
+  "token_statistics": {
+    "mean": 5691.523591087811,
+    "median": 5531.5,
+    "min": 2127,
+    "max": 10506,
+    "p95": 8331.75,
+    "p99": 9232.25
+  },
+  "recommended_max_seq_length": 10240,
+  "files": {
+    "train_chatml": "train_chatml.jsonl",
+    "val_chatml": "val_chatml.jsonl",
+    "train_sharegpt": "train_sharegpt.jsonl",
+    "val_sharegpt": "val_sharegpt.jsonl"
+  }
+}

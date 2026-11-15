@@ -1,0 +1,27 @@
+{
+  "dataset_name": "LifeMate-Harmonized-SFT-1526",
+  "description": "Harmonized 3-tier SFT dataset with 100% unified System Prompt architecture and 100% State Match.",
+  "total_samples": 1526,
+  "train_samples": 1450,
+  "val_samples": 76,
+  "prompt_breakdown": {
+    "unified_comprehensive_prompt_samples": 1526
+  },
+  "metrics": {
+    "state_match_rate": 1.0,
+    "average_score": 0.8655065700281952,
+    "average_f1": 0.8655065700281952,
+    "perfect_score_count": 1048
+  },
+  "token_statistics": {
+    "mean": 5941.049148099607,
+    "max": 10889,
+    "min": 2342
+  },
+  "files": {
+    "master_json": "harmonized_sft_1526_samples.json",
+    "master_jsonl": "harmonized_sft_1526_samples.jsonl",
+    "train_chatml": "harmonized_train_chatml.jsonl",
+    "val_chatml": "harmonized_val_chatml.jsonl"
+  }
+}

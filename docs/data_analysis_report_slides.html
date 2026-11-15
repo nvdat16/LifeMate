@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Cáo Phân Tích Dữ Liệu Zalo AI Challenge 2026 (LifeMate)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-active {
+      display: block;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .slide-hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased font-sans select-none min-h-screen flex flex-col justify-between p-4 md:p-8">
+
+  <!-- Top Navigation & Progress Bar -->
+  <header class="max-w-6xl w-full mx-auto mb-4">
+    <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          Zalo AI Challenge 2026
+        </span>
+        <span class="text-xs md:text-sm font-medium text-slate-400">
+          Track: LifeMate — Voice Agents
+        </span>
+      </div>
+      <div class="flex items-center gap-2 text-xs text-slate-400 font-mono">
+        <span>Slide</span>
+        <span id="currentSlideNum" class="text-emerald-400 font-bold text-sm">1</span>
+        <span>/</span>
+        <span id="totalSlideNum" class="text-slate-500">7</span>
+      </div>
+    </div>
+    <!-- Progress Line -->
+    <div class="w-full bg-slate-800 h-1 mt-2 rounded-full overflow-hidden">
+      <div id="progressBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-[14.28%] transition-all duration-300"></div>
+    </div>
+  </header>
+
+  <!-- Main Slide Container -->
+  <main class="max-w-6xl w-full mx-auto flex-1 flex flex-col justify-center my-2">
+
+    <!-- SLIDE 1: COVER -->
+    <section class="slide slide-active bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-12 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="relative z-10">
+        <div class="inline-block px-3 py-1 bg-slate-800 text-slate-300 rounded-lg text-xs font-mono uppercase tracking-wider mb-4 border border-slate-700">
+          Official Dataset Analysis Report
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+          Báo Cáo Phân Tích Dữ Liệu Thi Đấu<br>
+          <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+            Tập Train & Public Test (LifeMate)
+          </span>
+        </h1>
+        <p class="text-slate-300 text-base md:text-lg max-w-3xl mb-8 leading-relaxed">
+          Tổng hợp chi tiết cơ cấu mẫu dữ liệu, file âm thanh đa lượt thoại, danh mục công cụ (tools catalog), 
+          phân bố các kịch bản thực tế, và phát hiện quan trọng về dịch chuyển phân phối (Domain Shift) 
+          giữa hai tập dữ liệu chính thức do BTC phát hành.
+        </p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-slate-800">
+          <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+            <div class="text-slate-400 text-xs">Tổng Số Mẫu</div>
+            <div class="text-2xl font-bold text-emerald-400 mt-1">2.179</div>
+            <div class="text-slate-500 text-[11px] mt-0.5">1.545 train + 634 test</div>
+          </div>
+          <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+            <div class="text-slate-400 text-xs">Tổng File Audio .wav</div>
+            <div class="text-2xl font-bold text-cyan-400 mt-1">6.969</div>
+            <div class="text-slate-500 text-[11px] mt-0.5">~1.08 GB âm thanh gốc</div>
+          </div>
+          <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+            <div class="text-slate-400 text-xs">Tổng Số Ứng Dụng</div>
+            <div class="text-2xl font-bold text-amber-400 mt-1">57 Apps</div>
+            <div class="text-slate-500 text-[11px] mt-0.5">Đa lĩnh vực số</div>
+          </div>
+          <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+            <div class="text-slate-400 text-xs">Môi Trường Giả Lập</div>
+            <div class="text-2xl font-bold text-purple-400 mt-1">ToolEnv</div>
+            <div class="text-slate-500 text-[11px] mt-0.5">Kiểm thử trạng thái Hash</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: VOLUME COMPARISON -->
+    <section class="slide slide-hidden bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <span class="text-xs font-mono text-emerald-400 uppercase tracking-wider">Phần 1</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-0.5">Quy Mô Dữ Liệu: Train vs Public Test</h2>
+        </div>
+        <span class="px-3 py-1 rounded-md text-xs bg-slate-800 text-slate-300 border border-slate-700">Dung lượng & Cấu trúc</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Train Card -->
+        <div class="bg-slate-950/80 border border-emerald-500/30 rounded-xl p-5 relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-bl-lg text-xs font-semibold">
+            TẬP HUẤN LUYỆN (TRAIN)
+          </div>
+          <div class="text-slate-400 text-xs uppercase font-mono mb-2">Đặc tính kỹ thuật</div>
+          <ul class="space-y-3 text-sm">
+            <li class="flex justify-between items-center pb-2 border-b border-slate-800">
+              <span class="text-slate-300">Số lượng mẫu (samples):</span>
+              <span class="font-bold text-white text-base">1.545 mẫu</span>
+            </li>
+            <li class="flex justify-between items-center pb-2 border-b border-slate-800">
+              <span class="text-slate-300">File âm thanh (`.wav`):</span>
+              <span class="font-semibold text-emerald-300">5.036 file (768.74 MB)</span>
+            </li>
+            <li class="flex justify-between items-center pb-2 border-b border-slate-800">
+              <span class="text-slate-300">Văn bản lời thoại (`audio_text`):</span>
+              <span class="font-semibold text-emerald-400">Có sẵn (Ground Truth)</span>
+            </li>
+            <li class="flex justify-between items-center pb-2 border-b border-slate-800">
+              <span class="text-slate-300">Nhãn hành động (`label`):</span>
+              <span class="font-semibold text-emerald-400">Đầy đủ tool_calls & state_hash</span>
+            </li>
+            <li class="flex justify-between items-center">
+              <span class="text-slate-300">Số lượt thoại TB / mẫu:</span>
+              <span class="font-bold text-white">5.52 lượt (Min 1 - Max 25)</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Public Test Card -->
+        <div class="bg-slate-950/80 border border-cyan-500/30 rounded-xl p-5 relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-bl-lg text-xs font-semibold">
+            TẬP ĐÁNH GIÁ (PUBLIC TEST)
+          </div>
+          <div class="text-slate-400 text-xs uppercase font-mono mb-2">Đặc tính kỹ thuật</div>
+          <ul class="space-y-3 text-sm">
+            <li class="flex justify-between items-center pb-2 border-b border-slate-800">
+              <span class="text-slate-300">Số lượng mẫu (samples):</span>
+              <span class="font-bold text-white text-base">634 mẫu</span>
+            </li>
+            <li class="flex justify-between items-center pb-2 border-b border-slate-800">
+              <span class="text-slate-300">File âm thanh (`.wav`):</span>
+              <span class="font-semibold text-cyan-300">1.933 file (310.14 MB)</span>
+            </li>
+            <li class="flex justify-between items-center pb-2 border-b border-slate-800">
+              <span class="text-slate-300">Văn bản lời thoại (`audio_text`):</span>
+              <span class="font-semibold text-rose-400">Hoàn toàn KHÔNG CÓ</span>
+            </li>
+            <li class="flex justify-between items-center pb-2 border-b border-slate-800">
+              <span class="text-slate-300">Nhãn hành động (`label`):</span>
+              <span class="font-semibold text-rose-400">Ẩn 100% (BTC giữ để chấm)</span>
+            </li>
+            <li class="flex justify-between items-center">
+              <span class="text-slate-300">Số lượt thoại TB / mẫu:</span>
+              <span class="font-bold text-white">5.10 lượt (Min 1 - Max 25)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 flex items-start gap-3">
+        <span class="text-amber-400 text-xl leading-none mt-0.5">⚠️</span>
+        <div class="text-xs md:text-sm text-slate-300 leading-relaxed">
+          <strong class="text-amber-300 font-semibold">Điểm mấu chốt:</strong> Tập test hoàn toàn là file âm thanh thực (`.wav`), 
+          không có văn bản mồi. Điều này đồng nghĩa giải pháp bắt buộc phải có thành phần ASR (như PhoWhisper) 
+          nhận diện giọng nói tiếng Việt chuẩn xác trước khi đưa vào luồng quyết định hành động.
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: SCENARIO DISTRIBUTION -->
+    <section class="slide slide-hidden bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <span class="text-xs font-mono text-emerald-400 uppercase tracking-wider">Phần 2</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-0.5">Phân Bố Kịch Bản Thực Tế (Từ Nhãn Train)</h2>
+        </div>
+        <span class="px-3 py-1 rounded-md text-xs bg-slate-800 text-slate-300 border border-slate-700">1.545 Mẫu Train</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <!-- Out of scope -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-rose-500/30">
+          <div class="text-rose-400 text-xs font-semibold uppercase">Ngoài Phạm Vi</div>
+          <div class="text-3xl font-black text-white mt-2">7.2%</div>
+          <div class="text-slate-400 text-xs mt-1">111 mẫu</div>
+          <div class="text-slate-500 text-[11px] mt-2 border-t border-slate-800/80 pt-2">
+            Không có app nào xử lý được $\rightarrow$ Trả về `tool_calls: []`, giữ nguyên state hash ban đầu.
+          </div>
+        </div>
+
+        <!-- 1 call -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-blue-500/30">
+          <div class="text-blue-400 text-xs font-semibold uppercase">Đơn Bước (1 Call)</div>
+          <div class="text-3xl font-black text-white mt-2">23.9%</div>
+          <div class="text-slate-400 text-xs mt-1">369 mẫu</div>
+          <div class="text-slate-500 text-[11px] mt-2 border-t border-slate-800/80 pt-2">
+            Hành động tức thời (bật đèn, tra thời tiết, chuyển khoản trực tiếp khi đã có đủ thông tin).
+          </div>
+        </div>
+
+        <!-- 2-3 calls -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/40 bg-emerald-950/10">
+          <div class="text-emerald-400 text-xs font-semibold uppercase flex items-center justify-between">
+            <span>Đa Bước (2-3 Calls)</span>
+            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded">Chiếm đa số</span>
+          </div>
+          <div class="text-3xl font-black text-emerald-300 mt-2">50.9%</div>
+          <div class="text-slate-400 text-xs mt-1">787 mẫu</div>
+          <div class="text-slate-400 text-[11px] mt-2 border-t border-slate-800/80 pt-2">
+            Quy trình Read $\rightarrow$ Write (tìm liên hệ rồi gửi tin, tra sự kiện rồi sửa lịch).
+          </div>
+        </div>
+
+        <!-- 4+ calls -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-purple-500/30">
+          <div class="text-purple-400 text-xs font-semibold uppercase">Phức Hợp (4+ Calls)</div>
+          <div class="text-3xl font-black text-white mt-2">18.0%</div>
+          <div class="text-slate-400 text-xs mt-1">278 mẫu</div>
+          <div class="text-slate-500 text-[11px] mt-2 border-t border-slate-800/80 pt-2">
+            Điều kiện logic rẽ nhánh (kiểm tra thời tiết mưa/nắng, dời lịch, nhắn sếp, hủy xe).
+          </div>
+        </div>
+      </div>
+
+      <!-- Missing info highlight -->
+      <div class="bg-indigo-950/40 border border-indigo-500/40 rounded-xl p-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg">
+            ❓
+          </div>
+          <div>
+            <div class="text-sm font-bold text-indigo-200">
+              Kịch bản Hỏi Lại Người Dùng: <code class="text-indigo-400 font-mono text-xs">sys.ask_missing_info</code>
+            </div>
+            <div class="text-xs text-slate-400 mt-0.5">
+              Xuất hiện trong <span class="text-indigo-300 font-semibold">217 mẫu (14.0%)</span> khi yêu cầu thiếu tham số bắt buộc không thể tự tra cứu.
+            </div>
+          </div>
+        </div>
+        <div class="text-right hidden md:block">
+          <span class="text-xs font-mono text-slate-400">Bắt buộc xử lý chuẩn schema</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: THE DOMAIN SHIFT DISCOVERY -->
+    <section class="slide slide-hidden bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <span class="text-xs font-mono text-rose-400 uppercase tracking-wider font-semibold">Phát Hiện Sống Còn</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-0.5">Phân Tích Danh Mục App & Domain Shift</h2>
+        </div>
+        <span class="px-3 py-1 rounded-md text-xs bg-rose-500/20 text-rose-300 border border-rose-500/30">Critical Discovery</span>
+      </div>
+
+      <p class="text-sm text-slate-300 mb-6">
+        So sánh danh mục công cụ (`tools_catalog.json`) giữa 2 tập cho thấy sự dịch chuyển ứng dụng rất lớn mà BTC cố tình thiết kế để bẫy các mô hình học vẹt (hardcoding):
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+        <!-- Box 1 -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <div class="text-xs text-slate-400 font-mono uppercase">Train Catalog</div>
+          <div class="text-2xl font-bold text-white mt-1">46 Apps / 147 Tools</div>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+            Có 21 app <strong>chỉ xuất hiện ở train</strong> (ví dụ: `appliances`, `robot_vacuum`, `door_lock`, `bike_rental`, `subscriptions`, `library`...).
+          </p>
+        </div>
+
+        <!-- Box 2: 11 New Apps -->
+        <div class="bg-rose-950/30 p-4 rounded-xl border border-rose-500/50 relative overflow-hidden">
+          <div class="text-xs text-rose-400 font-mono uppercase font-bold">11 Apps Mới Tinh Ở Public Test</div>
+          <div class="text-2xl font-bold text-rose-300 mt-1">Hoàn Toàn Mới Lạ!</div>
+          <div class="flex flex-wrap gap-1.5 mt-3">
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">grocery</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">stocks</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">ecommerce</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">pantry</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">habit_tracker</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">recipes</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">parking</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">event_tickets</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">train_bus_tickets</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">public_transit</span>
+            <span class="px-2 py-0.5 rounded text-[11px] bg-rose-900/40 text-rose-200 border border-rose-700/50">translator</span>
+          </div>
+        </div>
+
+        <!-- Box 3: Total -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <div class="text-xs text-slate-400 font-mono uppercase">Tổng Toàn Giải Đấu</div>
+          <div class="text-2xl font-bold text-emerald-400 mt-1">57 Apps Riêng Biệt</div>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+            Mỗi mẫu dữ liệu được cấp ngẫu nhiên khoảng <strong>14 apps cài đặt</strong> trong context (`installed_apps`).
+          </p>
+        </div>
+      </div>
+
+      <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-center gap-2">
+        <span class="text-emerald-400 font-bold">🎯 Kết luận cho nhóm:</span>
+        <span>Tuyệt đối không hardcode tên tool hay viết if/else cứng theo domain của tập train. Mọi quyết định phải dựa vào <strong>Dynamic Schema Parsing</strong> trực tiếp từ catalog!</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: SAMPLE ANATOMY & CONTEXT -->
+    <section class="slide slide-hidden bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <span class="text-xs font-mono text-emerald-400 uppercase tracking-wider">Phần 3</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-0.5">Giải Phẫu Cấu Trúc Ngữ Cảnh (Sample Context)</h2>
+        </div>
+        <span class="px-3 py-1 rounded-md text-xs bg-slate-800 text-slate-300 border border-slate-700">Đầu Vào Của Mỗi Mẫu</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+          <div class="text-xs font-bold text-emerald-400 uppercase tracking-wide flex items-center gap-2">
+            <span>⏱️</span> Thời Gian & Không Gian
+          </div>
+          <div class="text-xs text-slate-300">
+            <code class="text-emerald-300">current_time</code>: Chuẩn ISO-8601 (ví dụ <code class="text-slate-400">2026-11-28T07:10:00+07:00</code>).
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Dùng để giải các từ ngữ thời gian tương đối như <em>"mai"</em>, <em>"tối nay"</em>, <em>"thứ 6 tuần sau"</em>.
+          </p>
+          <div class="text-xs text-slate-300">
+            <code class="text-emerald-300">location</code>: Tọa độ lat/lng và địa chỉ cơ quan, nhà riêng của người dùng.
+          </div>
+        </div>
+
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+          <div class="text-xs font-bold text-cyan-400 uppercase tracking-wide flex items-center gap-2">
+            <span>📱</span> Ứng Dụng Được Phép
+          </div>
+          <div class="text-xs text-slate-300">
+            <code class="text-cyan-300">installed_apps</code>: Danh sách quyền hạn.
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Chỉ được gọi các tool nằm trong danh sách này. Bất kỳ tool nào gọi ngoài danh sách sẽ bị tính là lỗi schema và nhận điểm 0.
+          </p>
+          <div class="text-[11px] text-slate-500">
+            Trung bình 14 apps / sample (dao động từ 5 đến 22 apps).
+          </div>
+        </div>
+
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+          <div class="text-xs font-bold text-amber-400 uppercase tracking-wide flex items-center gap-2">
+            <span>💬</span> Lịch Sử Hội Thoại
+          </div>
+          <div class="text-xs text-slate-300">
+            <code class="text-amber-300">history</code>: Các lượt thoại trước đó.
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Bao gồm audio lượt thoại trước (`_u1.wav`, `_u2.wav`) và các tool_calls đã thực hiện trước đó.
+          </p>
+          <div class="text-[11px] text-emerald-400 font-medium">
+            Lưu ý: Các hành động trong history đã được nạp sẵn vào trạng thái ban đầu của môi trường giả lập.
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800 text-xs text-slate-400">
+        <strong class="text-white">Quy định bảo mật của BTC:</strong> Môi trường người dùng được lưu ở 
+        <code class="text-amber-300">&lt;split&gt;_environment/&lt;id&gt;/state.json</code>. 
+        Tuyệt đối <strong>không được đọc trực tiếp file này</strong> mà mọi tương tác đọc/ghi phải đi qua thư viện giả lập <code class="text-cyan-300">zaic_tools.ToolEnv</code>.
+      </div>
+    </section>
+
+    <!-- SLIDE 6: SCORING & HASH RULES -->
+    <section class="slide slide-hidden bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl">
+      <div class="flex items-center justify-between mb-5">
+        <div>
+          <span class="text-xs font-mono text-emerald-400 uppercase tracking-wider">Phần 4</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-0.5">Cơ Chế Chấm Điểm & Luật Hash Bắt Buộc</h2>
+        </div>
+        <span class="px-3 py-1 rounded-md text-xs bg-slate-800 text-slate-300 border border-slate-700">Công thức chính thức</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+        <!-- Formula Box -->
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="text-xs uppercase font-mono text-slate-400 mb-2 flex items-center justify-between">
+              <span>Công Thức Toán Học Điểm Số (Score_i)</span>
+              <span class="text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">Chuẩn BTC Quy Định</span>
+            </div>
+            
+            <div class="bg-slate-900/90 p-3 rounded-lg border border-slate-800 font-mono text-xs space-y-2 mb-3">
+              <!-- Out of scope case -->
+              <div class="p-2 rounded bg-amber-500/10 border border-amber-500/20 text-slate-200">
+                <span class="text-amber-300 font-bold">1. Out-of-Scope (|Gold| = 0):</span>
+                <div class="mt-1 text-emerald-300 text-[11px] leading-relaxed">
+                  • Score = <strong class="text-white font-bold">1.0</strong> (100% điểm) khi nộp <code class="text-amber-200">tool_calls = []</code> và hash khớp.<br>
+                  • Score = <strong class="text-rose-400 font-bold">0</strong> nếu gọi nhầm bất kỳ tool nào.
+                </div>
+              </div>
+              
+              <!-- In scope case -->
+              <div class="p-2 rounded bg-emerald-500/10 border border-emerald-500/20 text-slate-200">
+                <span class="text-emerald-400 font-bold">2. In-Scope (|Gold| &gt; 0):</span>
+                <div class="mt-1 text-emerald-300 text-[11px] leading-relaxed">
+                  • Score = <strong class="text-white font-bold">(2 · P · R) / (P + R)</strong> khi <code class="text-emerald-200">hash_sys == hash_gold</code> và M &gt; 0.<br>
+                  • Score = <strong class="text-rose-400 font-bold">0</strong> nếu sai hash hoặc M == 0.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] text-slate-400 space-y-1 bg-slate-900/50 p-2.5 rounded-lg border border-slate-800/80">
+            <div>• <strong class="text-white">M:</strong> Số tool call khớp chuẩn (tên + đối số; free-text cần F1 &gt; 0.6).</div>
+            <div>• <strong class="text-white">P (Precision):</strong> M / (M + U) (U là tool thừa hoặc gọi sai schema).</div>
+            <div>• <strong class="text-white">R (Recall):</strong> M / |Gold| (tổng số tool gold yêu cầu).</div>
+            <div>• <strong class="text-white">Điều kiện sống còn:</strong> <code>state_hash</code> sai $\rightarrow$ <strong>0 điểm</strong> (trừ out_of_scope không đổi state).</div>
+          </div>
+        </div>
+
+        <!-- Hash Exception Box -->
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+          <div class="text-xs uppercase font-mono text-slate-400 mb-2">Quy Định Ngoại Lệ Khi Tính State Hash</div>
+          <div class="space-y-3 text-xs text-slate-300">
+            <div class="p-2.5 bg-slate-900 rounded-lg border border-slate-800">
+              <strong class="text-amber-300">12 Trường Văn Bản Tự Do (FREE_TEXT_KEYS):</strong><br>
+              <code class="text-[11px] text-slate-400">address, body, content, dropoff, expression, label, location, name, note, pickup, subject, title</code><br>
+              $\rightarrow$ <span class="text-emerald-400">Không tham gia vào việc tính hash</span> (chỉ cần fuzzy match F1 > 0.6).
+            </div>
+            <div class="p-2.5 bg-slate-900 rounded-lg border border-slate-800">
+              <strong class="text-cyan-300">5 App Tin Tức / Dữ Liệu Sống (LIVE_APPS):</strong><br>
+              <code class="text-[11px] text-slate-400">weather, gold_price, fuel_price, lottery, exchange_rate</code><br>
+              $\rightarrow$ <span class="text-emerald-400">Không lưu state</span>, gọi để lấy thông tin đưa vào ngữ cảnh.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs text-slate-300 flex items-center justify-between">
+        <span>⏱️ <strong>Giới hạn thời gian máy chủ BTC:</strong> Tối đa <strong>30 giây / sample</strong>. Quá 30s bị tính 0 điểm.</span>
+        <span class="text-emerald-400 font-mono text-[11px]">Server: 1x NVIDIA A30 24GB</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: SUMMARY & ACTIONABLE TAKEAWAYS -->
+    <section class="slide slide-hidden bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <span class="text-xs font-mono text-emerald-400 uppercase tracking-wider">Tổng Kết</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-0.5">Bảng Tóm Lược Cho Nhóm Nghiên Cứu</h2>
+        </div>
+        <span class="px-3 py-1 rounded-md text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Action Items</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+          <div class="text-sm font-bold text-emerald-300 flex items-center gap-2">
+            <span>📌</span> 1. Tính Chất Dữ Liệu Cốt Lõi
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4 leading-relaxed">
+            <li>Tập Public Test <strong>100% là Audio thô</strong>, bắt buộc pipeline nhận diện giọng nói (ASR PhoWhisper) phải ổn định.</li>
+            <li>Hơn <strong>50.9%</strong> là tác vụ đa bước Read $\rightarrow$ Write; cần tra cứu thông tin (ID, thời tiết, sự kiện) trước khi cập nhật.</li>
+            <li>Có <strong>7.2% mẫu Out-of-Scope</strong> cần phát hiện sớm để trả về danh sách rỗng, tránh gọi sai tool bị trừ điểm F1.</li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+          <div class="text-sm font-bold text-cyan-300 flex items-center gap-2">
+            <span>📌</span> 2. Ràng Buộc Kỹ Thuật Nghiêm Ngặt
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4 leading-relaxed">
+            <li>Có <strong>11 apps mới tinh</strong> trong test catalog $\rightarrow$ Tuyệt đối không được phụ thuộc vào danh sách app cứng của train.</li>
+            <li>Quy định BTC: <strong>Tổng toàn bộ hệ thống &lt; 6B parameters</strong> và <strong>LLM &lt; 5B parameters</strong>.</li>
+            <li><strong>Cấm tuyệt đối</strong> gán nhãn tập `public_test` hoặc `private_test` để huấn luyện hay tinh chỉnh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center p-4 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 rounded-xl border border-emerald-500/20">
+        <div class="text-sm font-bold text-white">Báo Cáo Hoàn Tất — Sẵn Sàng Chia Sẻ Cho Toàn Đội</div>
+        <div class="text-xs text-slate-400 mt-1">Dữ liệu được trích xuất và kiểm chứng trực tiếp trên bộ dev-kit Zalo AI Challenge 2026.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Controls -->
+  <footer class="max-w-6xl w-full mx-auto flex items-center justify-between pt-4 border-t border-slate-800 text-xs">
+    <div class="text-slate-500 hidden md:block">
+      Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300 font-mono">←</kbd> và <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300 font-mono">→</kbd> trên bàn phím để chuyển slide
+    </div>
+
+    <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+      <button id="prevBtn" onclick="changeSlide(-1)" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition flex items-center gap-1.5 disabled:opacity-30 disabled:pointer-events-none">
+        <span>←</span> Trước
+      </button>
+
+      <div class="flex gap-1.5" id="slideDots">
+        <!-- Generated by JS -->
+      </div>
+
+      <button id="nextBtn" onclick="changeSlide(1)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg shadow-lg shadow-emerald-950 transition flex items-center gap-1.5 disabled:opacity-30 disabled:pointer-events-none">
+        Tiếp <span>→</span>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const currentSlideNum = document.getElementById('currentSlideNum');
+    const totalSlideNum = document.getElementById('totalSlideNum');
+    const progressBar = document.getElementById('progressBar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideDots = document.getElementById('slideDots');
+
+    totalSlideNum.textContent = totalSlides;
+
+    // Build Dots
+    slides.forEach((_, idx) => {
+      const dot = document.createElement('button');
+      dot.className = `w-2 h-2 rounded-full transition-all ${idx === 0 ? 'bg-emerald-400 w-5' : 'bg-slate-700 hover:bg-slate-600'}`;
+      dot.onclick = () => goToSlide(idx);
+      slideDots.appendChild(dot);
+    });
+
+    function updateView() {
+      slides.forEach((s, idx) => {
+        if (idx === currentSlide) {
+          s.classList.remove('slide-hidden');
+          s.classList.add('slide-active');
+        } else {
+          s.classList.add('slide-hidden');
+          s.classList.remove('slide-active');
+        }
+      });
+
+      currentSlideNum.textContent = currentSlide + 1;
+      progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+
+      prevBtn.disabled = (currentSlide === 0);
+      nextBtn.disabled = (currentSlide === totalSlides - 1);
+
+      // Update dots
+      Array.from(slideDots.children).forEach((dot, idx) => {
+        if (idx === currentSlide) {
+          dot.className = 'w-5 h-2 rounded-full bg-emerald-400 transition-all';
+        } else {
+          dot.className = 'w-2 h-2 rounded-full bg-slate-700 hover:bg-slate-600 transition-all';
+        }
+      });
+    }
+
+    function changeSlide(direction) {
+      const target = currentSlide + direction;
+      if (target >= 0 && target < totalSlides) {
+        currentSlide = target;
+        updateView();
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateView();
+      }
+    }
+
+    // Keyboard Navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        changeSlide(1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        changeSlide(-1);
+      }
+    });
+
+    updateView();
+  </script>
+</body>
+</html>
+

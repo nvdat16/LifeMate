@@ -1,0 +1,10 @@
+# GPU training stack from finetune_phowhisper_large_lora.ipynb.
+# Use a separate environment from LLM/Unsloth training.
+torch>=2.6,<3
+transformers==4.57.1
+peft==0.18.0
+accelerate==1.12.0
+bitsandbytes==0.48.2
+soundfile>=0.12,<1
+numpy>=1.26,<3
+safetensors>=0.4
